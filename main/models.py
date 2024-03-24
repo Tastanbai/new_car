@@ -2,10 +2,12 @@ from django.db import models
 
 # Create your models here.
 class Car(models.Model):
+    image=models.ImageField(upload_to='car_images',null=True)
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     fuel_type = models.CharField(max_length=50)
     volume = models.DecimalField(max_digits=5, decimal_places=2)
+    is_rented = models.BooleanField(default=False)
 
 def __str__(self):
     return self.name

@@ -38,7 +38,7 @@
     </div>
   </div>
     <div class="row justify-content-center align-items-center">
-        <a type="button" href="{% url 'main:rent_car' car_name=car.name %}" class="btn btn-success">Rent</a>
+        <a type="button" href="{% url 'main:rent_car' car.id car.name %}" class="btn btn-success">Rent</a>
     </div>
 </div>
 
