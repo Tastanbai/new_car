@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -118,7 +119,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-import os
+STATICFILES_DIRS=[
+    BASE_DIR / 'static'
+]
+
 
 # Указание каталога, в котором будут храниться медиафайлы
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -134,10 +138,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL= True
-EMAIL_HOST_USER = 'tastan.bay@yandex.kz'
-EMAIL_HOST_PASSWORD = '*********' 
+EMAIL_HOST = 'tastanbay02@gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'tastanbay02@gmail.com'
+EMAIL_HOST_PASSWORD = '***' 
 

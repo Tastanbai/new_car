@@ -4,7 +4,7 @@ from .forms import RentalForm
 from .forms import ContactForm
 from django.contrib import messages 
 from django.utils import timezone 
-
+from .models import Feedback
 
 
 
@@ -14,9 +14,6 @@ def about(request):
     }
     return render(request, 'main/about.html', context)
 
-
-
-from .models import Feedback
 
 # def contact(request):
 #     context = {'title': 'Contact'}
@@ -49,30 +46,24 @@ from .models import Feedback
 #     context['form'] = form
 #     return render(request, 'main/contact.html', context)
 
+
 def contact(request):
-    context = {'title': 'Contact'}
 
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            # Создаем объект Feedback и сохраняем его
-            feedback = Feedback(
-                first_name=form.cleaned_data['first_name'],
-                last_name=form.cleaned_data['last_name'],
-                email=form.cleaned_data['email'],
-                phone_number=form.cleaned_data.get('phone_number', ''),
-                message=form.cleaned_data['message'],
-            )
-            feedback.save()
-
-            # Перенаправляем пользователя на страницу успеха после сохранения формы
-            return redirect('main:success_page')  
+            form.save()
+            return redirect('main:success_page')  # Укажите здесь имя URL вашей страницы успеха
+        # Если форма не валидна, отобразим её снова с сообщениями об ошибках
+        else:
+            print("********* ERROR")
     else:
         form = ContactForm()
-    
-    context['form'] = form
+    context = {
+        'form': form,
+        'title': 'Contact'
+        }
     return render(request, 'main/contact.html', context)
-
 
 
 def show(request, car_id):
