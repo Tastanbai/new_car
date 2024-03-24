@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect 
-from .models import Car, Rental 
+from .models import Car, Rental
 from .forms import RentalForm
 from .forms import ContactForm
 from django.contrib import messages 
 from django.utils import timezone 
 from .models import Feedback
-
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 def about(request):
     context={
@@ -15,50 +15,23 @@ def about(request):
     return render(request, 'main/about.html', context)
 
 
-# def contact(request):
-#     context = {'title': 'Contact'}
-
-#     if request.method == 'POST':
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             # Создаем объект Feedback и сохраняем его
-#             feedback = Feedback(
-#                 first_name=form.cleaned_data['first_name'],
-#                 last_name=form.cleaned_data['last_name'],
-#                 email=form.cleaned_data['email'],
-#                 phone_number=form.cleaned_data.get('phone_number', ''),
-#                 message=form.cleaned_data['message'],
-#             )
-#             feedback.save()
-
-#             # Теперь отправляем email
-#             send_mail(
-#                 subject=f'Message from {feedback.first_name} {feedback.last_name}',
-#                 message=feedback.message,
-#                 from_email=feedback.email,
-#                 recipient_list=['tastan.bay@yandex.kz'],  
-#                 fail_silently=False,
-#             )
-#             return redirect('main:success_page')  
-#     else:
-#         form = ContactForm()
-    
-#     context['form'] = form
-#     return render(request, 'main/contact.html', context)
-
-
 def contact(request):
 
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('main:success_page')  # Укажите здесь имя URL вашей страницы успеха
-        # Если форма не валидна, отобразим её снова с сообщениями об ошибках
-        else:
-            print("********* ERROR")
+            contact_instance=form.save()
+            send_mail(
+                subject='New Contact Form Submission',
+                message=f"New submission from {contact_instance.first_name} - {contact_instance.email}. \n\nMessage:\n{contact_instance.message}",
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=['tastanbay02@gmail.com'],  # замените на ваш email для получения сообщений
+                fail_silently=False,
+            )
+            return redirect('main:success_page') 
     else:
         form = ContactForm()
+
     context = {
         'form': form,
         'title': 'Contact'
