@@ -26,9 +26,12 @@
     </header>
 
 
-  <div class="row">
-    <div class="col">
-      <img src="{{ car.image.url }}" class="img-fluid" alt="Image of {{ car.name }}">>
+    <div class="row">
+      {% for image in car.images.all %}
+        <div class="col">
+          <img src="{{ image.image.url }}" class="img-fluid" alt="Image of {{ car.name }}">
+        </div>
+      {% endfor %}
     </div>
     <div class="col">
       <h2>{{ car.name }}</h2>
