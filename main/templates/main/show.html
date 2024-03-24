@@ -1,0 +1,46 @@
+ {% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'main:index' %}" class="nav-link">Catalog</a></li>
+        <li class="nav-item"><a href="{% url 'main:about' %}" class="nav-link">About us</a></li>
+        <li class="nav-item"><a href="{% url 'main:contact' %}" class="nav-link">Contacts</a></li>
+      </ul>
+    </header>
+
+
+  <div class="row">
+    <div class="col">
+      <img src="#" class="img-fluid" alt="Placeholder Image">
+    </div>
+    <div class="col">
+      <h2>{{ car.name }}</h2>
+      <p>{{ car.description }}</p>
+      <h3>Price: {{ car.price }} $/day</h3>
+      <p>Transmission:</p>
+    </div>
+  </div>
+    <div class="row justify-content-center align-items-center">
+        <a type="button" href="{% url 'main:rent_car' car_name=car.name %}" class="btn btn-success">Rent</a>
+    </div>
+</div>
+
+</body>
+</html>

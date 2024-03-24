@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <form id="myForm" method="POST">
+        {% csrf_token %}
+        
+      <div class="mb-3">
+            <label for="car" class="form-label">Car</label>
+            <input type="text" class="form-control" id="{{car.id}}" value="{{ car_name }}" readonly>
+            <!-- Используем имя автомобиля, полученное из контекста -->
+        </div>
+        <div class="mb-3">
+            <label for="agent" class="form-label">Agent</label>
+            <input name="agent" type="text" class="form-control" id="agent" placeholder="Enter agent's name">
+        </div>
+        <div class="mb-3">
+            <label for="date_out" class="form-label">Date Out</label>
+            <input name="date_out" type="date" class="form-control" id="date_out">
+        </div>
+        <div class="mb-3">
+            <label for="time_out" class="form-label">Time Out</label>
+            <input name="time_out" type="time" class="form-control" id="time_out">
+        </div>
+        <div class="mb-3">
+            <label for="date_in" class="form-label">Date In</label>
+            <input name="date_in" type="date" class="form-control" id="date_in">
+        </div>
+        <div class="mb-3">
+            <label for="time_in" class="form-label">Time In</label>
+            <input name="time_in" type="time" class="form-control" id="time_in">
+        </div>
+        <div class="mb-3">
+            <label for="fuel" class="form-label">Fuel (liters)</label>
+            <input name="fuel" type="number" class="form-control" id="fuel" step="0.01">
+        </div>
+        <div class="mb-3">
+            <label for="mileage" class="form-label">Mileage</label>
+            <input name="mileage" type="number" class="form-control" id="mileage">
+        </div>
+        <div class="mb-3">
+            <label for="payment" class="form-label">Payment</label>
+            <input name="payment" type="number" class="form-control" id="payment" step="0.01">
+        </div>
+        <div class="mb-3">
+            <label for="notes" class="form-label">Notes</label>
+            <textarea name="notes" class="form-control" id="notes" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</div>
+</body>
+</html>
